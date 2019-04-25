@@ -4,8 +4,8 @@
     "directive-selector": [
       true,
       "attribute",
-      "app",
-      "camelCase"
+      "app"
+//      "camelCase"
     ],
     "component-selector": [
       true,
