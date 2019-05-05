@@ -1,6 +1,14 @@
 {
   "extends": "../tslint.json",
+  "linterOptions": {
+    "exclude": [
+      "bin",
+      "src/app/pb/*",
+      "app/pb"
+    ]
+  },
   "rules": {
+    "class-name": false,
     "directive-selector": [
       true,
       "attribute",

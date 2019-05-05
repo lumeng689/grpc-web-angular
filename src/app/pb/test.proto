@@ -1,0 +1,31 @@
+// test.proto
+
+syntax = "proto3";
+
+package testPackage;
+
+service swithMSgService {
+    rpc loadMsgStream(stream CommonMsg) returns (stream CommonMsg) {}
+    rpc ping(PingRequest) returns (PingResponse) {}
+}
+
+message CommonMsg  {
+    string id = 1;
+    string sid = 2;
+    string type= 3;
+    int32 seq = 5;
+    string ver = 6;
+    string from = 7;
+    string to = 8;
+}
+
+message Test {
+    string message=1;
+}
+
+message PingRequest {
+}
+
+message PingResponse {
+    string id=1;
+}
