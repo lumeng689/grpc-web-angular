@@ -10,11 +10,14 @@
 import * as grpcWeb from 'grpc-web';
 
 import {
-  CommonMsg,
+  CommonMsgRequest,
+  CommonMsgResponse,
+  EchoRequest,
+  EchoResponse,
   PingRequest,
   PingResponse} from './test_pb';
 
-export class swithMSgServiceClient {
+export class SwitchMSgServiceClient {
   client_: grpcWeb.AbstractClientBase;
   hostname_: string;
   credentials_: null | { [index: string]: string; };
@@ -32,7 +35,7 @@ export class swithMSgServiceClient {
     this.options_ = options;
   }
 
-  methodInfoping = new grpcWeb.AbstractClientBase.MethodInfo(
+  methodInfoPing = new grpcWeb.AbstractClientBase.MethodInfo(
     PingResponse,
     (request: PingRequest) => {
       return request.serializeBinary();
@@ -47,11 +50,30 @@ export class swithMSgServiceClient {
                response: PingResponse) => void) {
     return this.client_.rpcCall(
       this.hostname_ +
-        '/testPackage.swithMSgService/ping',
+        '/testPackage.SwitchMSgService/Ping',
       request,
       metadata || {},
-      this.methodInfoping,
+      this.methodInfoPing,
       callback);
+  }
+
+  methodInfoLoadMsgStream = new grpcWeb.AbstractClientBase.MethodInfo(
+    CommonMsgResponse,
+    (request: CommonMsgRequest) => {
+      return request.serializeBinary();
+    },
+    CommonMsgResponse.deserializeBinary
+  );
+
+  loadMsgStream(
+    request: CommonMsgRequest,
+    metadata?: grpcWeb.Metadata) {
+    return this.client_.serverStreaming(
+      this.hostname_ +
+        '/testPackage.SwitchMSgService/LoadMsgStream',
+      request,
+      metadata || {},
+      this.methodInfoLoadMsgStream);
   }
 
 }

@@ -4,12 +4,14 @@ syntax = "proto3";
 
 package testPackage;
 
-service swithMSgService {
-    rpc loadMsgStream(stream CommonMsg) returns (stream CommonMsg) {}
-    rpc ping(PingRequest) returns (PingResponse) {}
+message PingRequest {
 }
 
-message CommonMsg  {
+message PingResponse {
+    string id=1;
+}
+
+message CommonMsgRequest  {
     string id = 1;
     string sid = 2;
     string type= 3;
@@ -19,13 +21,33 @@ message CommonMsg  {
     string to = 8;
 }
 
-message Test {
-    string message=1;
+message CommonMsgResponse  {
+    string id = 1;
+    string sid = 2;
+    string type= 3;
+    int32 seq = 5;
+    string ver = 6;
+    string from = 7;
+    string to = 8;
 }
 
-message PingRequest {
+message EchoRequest {
+  string message = 1;
 }
 
-message PingResponse {
-    string id=1;
+message EchoResponse {
+  string message = 1;
+  int32 message_count = 2;
+}
+
+
+service SwitchMSgService {
+    rpc Ping(PingRequest) returns (PingResponse);
+    rpc LoadMsgStream( CommonMsgRequest)
+      returns (stream CommonMsgResponse){
+      }
+
+    rpc ClientStreamingEcho(stream EchoRequest) returns (stream EchoResponse);
+
+    rpc HalfDuplexEcho(stream EchoRequest) returns (stream EchoResponse);
 }

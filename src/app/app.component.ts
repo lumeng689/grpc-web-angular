@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { EchoServiceClient } from './pb/EchoServiceClientPb';
 import { EchoRequest, EchoResponse, ServerStreamingEchoRequest, ServerStreamingEchoResponse } from './pb/echo_pb';
-// import { PingRequest, PingResponse, CommonMsg } from './pb/test_pb';
-// import { swithMSgServiceClient } from './pb/TestServiceClientPb';
+import { PingRequest, PingResponse, CommonMsgRequest, CommonMsgResponse } from './pb/test_pb';
+import { SwitchMSgServiceClient } from './pb/TestServiceClientPb';
 
-import { PingRequest, PingResponse } from './pb/testAny_pb';
-import { swithMSgServiceClient } from './pb/TestAnyServiceClientPb';
+// import { PingRequest, PingResponse, CommonMsgR } from './pb/testAny_pb';
+// import { swithMSgServiceClient } from './pb/TestAnyServiceClientPb';
 
 import * as grpcWeb from 'grpc-web';
 
@@ -20,15 +20,15 @@ export class AppComponent {
   readonly INTERVAL = 500;  // ms
   readonly MAX_STREAM_MESSAGES = 50;
   echoService: EchoServiceClient;
-  // testService: swithMSgServiceClient;
-  testAnyService: swithMSgServiceClient;
+  testService: SwitchMSgServiceClient;
+  // testAnyService: swithMSgServiceClient;
 
   msg: string;
 
   constructor() {
     this.echoService = new EchoServiceClient('http://127.0.0.1:8080', null, null);
-    // this.testService = new swithMSgServiceClient('http://127.0.0.1:8080', null, null);
-    this.testAnyService = new swithMSgServiceClient('http://127.0.0.1:8080', null, null);
+    this.testService = new SwitchMSgServiceClient('http://127.0.0.1:8080', null, null);
+    // this.testAnyService = new swithMSgServiceClient('http://127.0.0.1:8080', null, null);
   }
 
   send() {
@@ -49,31 +49,39 @@ export class AppComponent {
   }
 
   send3() {
-    const req = new PingRequest();
-    const call = this.testAnyService.ping(req, null, (err: grpcWeb.Error, response: PingResponse) => {
-      if (err) {
-        if (err.code !== grpcWeb.StatusCode.OK) {
-          console.error(err);
-          console.error('Error code: ' + err.code + ' "' + err.message + '"');
-          return;
-        }
-      }
-      console.dir(response);
-      console.log('ping -> :', response.getId());
-    });
-
-    call.on('status', (status: grpcWeb.Status) => {
-      if (status.metadata) {
-        console.log('=====print meta start ======');
-        console.log('Received metadata');
-        console.log(status.metadata);
-        console.log('=====print meta end ======');
-      }
-    });
+    // const req = new PingRequest();
+    // const call = this.testAnyService.ping(req, null, (err: grpcWeb.Error, response: PingResponse) => {
+    //   if (err) {
+    //     if (err.code !== grpcWeb.StatusCode.OK) {
+    //       console.error(err);
+    //       console.error('Error code: ' + err.code + ' "' + err.message + '"');
+    //       return;
+    //     }
+    //   }
+    //   console.dir(response);
+    //   console.log('ping -> :', response.getId());
+    // });
+    //
+    // call.on('status', (status: grpcWeb.Status) => {
+    //   if (status.metadata) {
+    //     console.log('=====print meta start ======');
+    //     console.log('Received metadata');
+    //     console.log(status.metadata);
+    //     console.log('=====print meta end ======');
+    //   }
+    // });
   }
 
   send4() {
-    const request = new PingRequest();
+    const request = new CommonMsgRequest();
+
+    const call = this.testService.loadMsgStream(request,{});
+    call.on('data',  (response) => {
+      console.log('Message -> :', response);
+    });
+    call.on('end',  () => {
+      console.log('end');
+    });
   }
 
   echo(msg: string) {

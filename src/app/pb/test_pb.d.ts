@@ -1,65 +1,5 @@
 import * as jspb from "google-protobuf"
 
-export class CommonMsg extends jspb.Message {
-  getId(): string;
-  setId(value: string): void;
-
-  getSid(): string;
-  setSid(value: string): void;
-
-  getType(): string;
-  setType(value: string): void;
-
-  getSeq(): number;
-  setSeq(value: number): void;
-
-  getVer(): string;
-  setVer(value: string): void;
-
-  getFrom(): string;
-  setFrom(value: string): void;
-
-  getTo(): string;
-  setTo(value: string): void;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): CommonMsg.AsObject;
-  static toObject(includeInstance: boolean, msg: CommonMsg): CommonMsg.AsObject;
-  static serializeBinaryToWriter(message: CommonMsg, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): CommonMsg;
-  static deserializeBinaryFromReader(message: CommonMsg, reader: jspb.BinaryReader): CommonMsg;
-}
-
-export namespace CommonMsg {
-  export type AsObject = {
-    id: string,
-    sid: string,
-    type: string,
-    seq: number,
-    ver: string,
-    from: string,
-    to: string,
-  }
-}
-
-export class Test extends jspb.Message {
-  getMessage(): string;
-  setMessage(value: string): void;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): Test.AsObject;
-  static toObject(includeInstance: boolean, msg: Test): Test.AsObject;
-  static serializeBinaryToWriter(message: Test, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): Test;
-  static deserializeBinaryFromReader(message: Test, reader: jspb.BinaryReader): Test;
-}
-
-export namespace Test {
-  export type AsObject = {
-    message: string,
-  }
-}
-
 export class PingRequest extends jspb.Message {
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PingRequest.AsObject;
@@ -89,6 +29,130 @@ export class PingResponse extends jspb.Message {
 export namespace PingResponse {
   export type AsObject = {
     id: string,
+  }
+}
+
+export class CommonMsgRequest extends jspb.Message {
+  getId(): string;
+  setId(value: string): void;
+
+  getSid(): string;
+  setSid(value: string): void;
+
+  getType(): string;
+  setType(value: string): void;
+
+  getSeq(): number;
+  setSeq(value: number): void;
+
+  getVer(): string;
+  setVer(value: string): void;
+
+  getFrom(): string;
+  setFrom(value: string): void;
+
+  getTo(): string;
+  setTo(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): CommonMsgRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: CommonMsgRequest): CommonMsgRequest.AsObject;
+  static serializeBinaryToWriter(message: CommonMsgRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): CommonMsgRequest;
+  static deserializeBinaryFromReader(message: CommonMsgRequest, reader: jspb.BinaryReader): CommonMsgRequest;
+}
+
+export namespace CommonMsgRequest {
+  export type AsObject = {
+    id: string,
+    sid: string,
+    type: string,
+    seq: number,
+    ver: string,
+    from: string,
+    to: string,
+  }
+}
+
+export class CommonMsgResponse extends jspb.Message {
+  getId(): string;
+  setId(value: string): void;
+
+  getSid(): string;
+  setSid(value: string): void;
+
+  getType(): string;
+  setType(value: string): void;
+
+  getSeq(): number;
+  setSeq(value: number): void;
+
+  getVer(): string;
+  setVer(value: string): void;
+
+  getFrom(): string;
+  setFrom(value: string): void;
+
+  getTo(): string;
+  setTo(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): CommonMsgResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: CommonMsgResponse): CommonMsgResponse.AsObject;
+  static serializeBinaryToWriter(message: CommonMsgResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): CommonMsgResponse;
+  static deserializeBinaryFromReader(message: CommonMsgResponse, reader: jspb.BinaryReader): CommonMsgResponse;
+}
+
+export namespace CommonMsgResponse {
+  export type AsObject = {
+    id: string,
+    sid: string,
+    type: string,
+    seq: number,
+    ver: string,
+    from: string,
+    to: string,
+  }
+}
+
+export class EchoRequest extends jspb.Message {
+  getMessage(): string;
+  setMessage(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): EchoRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: EchoRequest): EchoRequest.AsObject;
+  static serializeBinaryToWriter(message: EchoRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): EchoRequest;
+  static deserializeBinaryFromReader(message: EchoRequest, reader: jspb.BinaryReader): EchoRequest;
+}
+
+export namespace EchoRequest {
+  export type AsObject = {
+    message: string,
+  }
+}
+
+export class EchoResponse extends jspb.Message {
+  getMessage(): string;
+  setMessage(value: string): void;
+
+  getMessageCount(): number;
+  setMessageCount(value: number): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): EchoResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: EchoResponse): EchoResponse.AsObject;
+  static serializeBinaryToWriter(message: EchoResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): EchoResponse;
+  static deserializeBinaryFromReader(message: EchoResponse, reader: jspb.BinaryReader): EchoResponse;
+}
+
+export namespace EchoResponse {
+  export type AsObject = {
+    message: string,
+    messageCount: number,
   }
 }
 
